@@ -13,6 +13,7 @@
                 name: 'home',
                 url: '/',
                 templateUrl: '/features/home/home.template.html',
+                controller: 'homeController',
                 controllerAs: 'homeVm'
             });
         }
