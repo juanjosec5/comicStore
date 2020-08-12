@@ -9,6 +9,8 @@
             return {
                 restrict: 'EA',
                 templateUrl: '/layouts/directives/header/header.template.html',
+                controller: 'headerController',
+                controllerAs: 'headerVm'
             }
         }
 })();
