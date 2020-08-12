@@ -4,7 +4,6 @@
     angular
         .module('comicStore', [
             'ui.router',
-            'loginModule',
             'homeModule',
             'templates'
         ]);

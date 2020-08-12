@@ -12,7 +12,8 @@
             $stateProvider.state({
                 name: 'home',
                 url: '/',
-                template: '<h1>Home</h1> <br /><a ui-sref="login">login</a>'
+                templateUrl: '/features/home/home.template.html',
+                controllerAs: 'homeVm'
             });
         }
 })();
