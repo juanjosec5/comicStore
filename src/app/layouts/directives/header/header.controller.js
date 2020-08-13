@@ -5,16 +5,16 @@
         .module('homeModule')
         .controller('headerController', headerController);
 
-        headerController.$inject = [];
+        headerController.$inject = ['modalFactory'];
 
-        function headerController() {
+        function headerController(modalFactory) {
             var vm = this;
             vm.signIn = 'Sign in'
             vm.logIn = 'Login'
             vm.randomModal = randomModal;
 
             function randomModal() {
-                console.log('opening Modal')
+                modalFactory.openModal();
             }
         }
 })();

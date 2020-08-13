@@ -5,6 +5,11 @@
         .module('comicStore', [
             'ui.router',
             'homeModule',
-            'templates'
+            'templates',
+            'ngAnimate',
+            'ngTouch',
+            'ui.bootstrap',
+            'sharedModule',
+            'coreModule'
         ]);
 })();

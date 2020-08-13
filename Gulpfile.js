@@ -7,7 +7,8 @@ var gulp = require("gulp"),
     notify = require("gulp-notify"),
     inject = require("gulp-inject"),
     order = require("gulp-order"),
-    templateCache = require('gulp-angular-templatecache');
+    templateCache = require('gulp-angular-templatecache'),
+    cssbeautify = require('gulp-cssbeautify');
 
 function scripts() {
     return gulp
@@ -25,7 +26,11 @@ function scripts() {
 function dependencies() {
     var sources = [
         'node_modules/angular/angular.js', 
-        'node_modules/@uirouter/angularjs/release/angular-ui-router.js'
+        'node_modules/@uirouter/angularjs/release/angular-ui-router.js',
+        'node_modules/angular-animate/angular-animate.js', 
+        'node_modules/angular-touch/angular-touch.js',
+        'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js'
+
     ];
 
     return gulp
@@ -36,11 +41,18 @@ function dependencies() {
 }
 
 function styles() {
+    var sources = [
+        "node_modules/bootstrap/dist/css/bootstrap.css",
+        "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css",
+        "src/app/**/*.scss"
+    ];
+
     return gulp
-        .src(["src/app/**/*.scss"])
+        .src(sources)
         .pipe(sass())
         .on("error", sass.logError)
         .pipe(concat("main.css"))
+        .pipe(cssbeautify())
         .pipe(gulp.dest("dist/styles"))
         .pipe(browserSync.stream())
         .pipe(notify({ message: "CSS files successfully compiled into main.css" }));
@@ -50,6 +62,7 @@ function compileTemplates(){
     return gulp.src(['src/app/**/*.html'])
         .pipe(templateCache('templates.js', {standalone: true}))
         .pipe(gulp.dest('dist/scripts/'))
+        .pipe(browserSync.stream())
         .pipe(notify({ message: "HTML templates compiled and reduced to templates.js" }));
 }
 
@@ -84,7 +97,8 @@ function serve() {
 function watch() {
     gulp.watch("src/app/**/*.scss", styles);
     gulp.watch("src/app/**/*.js", scripts);
-    gulp.watch("src/*.html", series(index, injectHtml));
+    gulp.watch("src/app/**/*.html", compileTemplates);
+    gulp.watch("src/index.html", series(index, injectHtml));
     gulp.watch("src/", browserSync.reload());
 }
 

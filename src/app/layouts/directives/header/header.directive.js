@@ -7,7 +7,7 @@
 
         function csHeader() {
             return {
-                restrict: 'EA',
+                restrict: 'E',
                 templateUrl: '/layouts/directives/header/header.template.html',
                 controller: 'headerController',
                 controllerAs: 'headerVm'
