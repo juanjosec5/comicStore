@@ -5,16 +5,29 @@
         .module('homeModule')
         .controller('headerController', headerController);
 
-        headerController.$inject = ['modalFactory'];
+    headerController.$inject = ['modalFactory'];
 
-        function headerController(modalFactory) {
-            var vm = this;
-            vm.signIn = 'Sign in'
-            vm.logIn = 'Login'
-            vm.randomModal = randomModal;
+    function headerController(modalFactory) {
+        var vm = this;
+        vm.openLoginModal = openLoginModal;
+        vm.openSignUpModal = openSignUpModal;
 
-            function randomModal() {
-                modalFactory.openModal();
+        function openLoginModal() {
+            var loginModalOption = {
+                templateUrl: '/shared/modals/login/login.html',
+                controller: 'loginModalController',
+                controllerAs: 'loginModalVm'
             }
+            modalFactory.openModal(loginModalOption);
         }
+
+        function openSignUpModal() {
+            var signUpModalOptions = {
+                templateUrl: '/shared/modals/login/login.html',
+                controller: 'loginModalController',
+                controllerAs: 'loginModalVm'
+            }
+            modalFactory.openModal(signUpModalOptions);
+        }
+    }
 })();

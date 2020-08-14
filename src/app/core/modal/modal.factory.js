@@ -8,17 +8,44 @@
     modalFactory.inject = ['$uibModal'];
 
     function modalFactory($uibModal){
-
-        return {
-            openModal: openModal
+        var modalInstance;
+        var defaultOptions = {
+            templateUrl: '/shared/modals/base-modal/base-modal.html',
+            keyboard: true,
+            controller: 'baseModalController',
+            controllerAs: 'baseModalVm',
+            size: 'lg',
+            resolve: {
+                modalData: {
+                    buttons: [{
+                        text: 'login',
+                        action: function () {
+                            console.log('alskfn')
+                        },
+                        type: 'primary'
+                    }],
+                    random: 2
+                }
+            }
         }
 
-        function openModal(){
-            $uibModal.open({
-                
-                templateUrl: '/shared/directives/base-modal/base-modal.html'
-            });
+        return {         
+            openModal: openModal,
+            close: close,
+            dismiss: dismiss
+        }
+
+        function openModal(options){
+            options = angular.merge({}, defaultOptions, options || {});
+            modalInstance = $uibModal.open(options);
+        }
+
+        function close() {
+            modalInstance.close();
+        }
+
+        function dismiss() {
+            modalInstance.dismiss('cancel');
         }
     }
-
 }());
