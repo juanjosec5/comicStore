@@ -11,6 +11,7 @@
         var vm = this;
         vm.openLoginModal = openLoginModal;
         vm.openSignUpModal = openSignUpModal;
+        vm.openBaseModal = openBaseModal;
 
         function openLoginModal() {
             var loginModalOption = {
@@ -23,11 +24,43 @@
 
         function openSignUpModal() {
             var signUpModalOptions = {
-                templateUrl: '/shared/modals/login/login.html',
-                controller: 'loginModalController',
-                controllerAs: 'loginModalVm'
+                templateUrl: '/shared/modals/sign-up/sign-up.html',
+                controller: 'signUpController',
+                controllerAs: 'signUpModalVm',
+                resolve: {
+                    modalData: {
+                        title:'Sign up Modal Title',
+                        body: 'Sign up Modal Body',
+                        buttons: [{
+                            text: 'Ok',
+                            action: function () {
+                                console.log('alskfn');
+                            },
+                            type: 'primary'
+                        }
+                    ]}
+                }
             }
             modalFactory.openModal(signUpModalOptions);
+        }
+
+        function openBaseModal() {
+            // var baseModalOptions = {
+            //     resolve: {
+            //         modalData: {
+            //             title:'replaced title',
+            //             body: 'modal body',
+            //             buttons: [
+            //                 {
+            //                     text: 'BLA',
+            //                     action: modalFactory.close,
+            //                     type: 'primary'
+            //                 },
+            //             ]
+            //         }
+            //     }
+            // }
+            modalFactory.openModal();
         }
     }
 })();

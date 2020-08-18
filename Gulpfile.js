@@ -29,7 +29,8 @@ function dependencies() {
         'node_modules/@uirouter/angularjs/release/angular-ui-router.js',
         'node_modules/angular-animate/angular-animate.js', 
         'node_modules/angular-touch/angular-touch.js',
-        'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js'
+        'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+        'node_modules/lodash/lodash.js'
 
     ];
 
@@ -103,35 +104,3 @@ function watch() {
 }
 
 exports.default = series(scripts, dependencies, styles, compileTemplates, index, injectHtml, serve);
-
-//==================================================================
-//Gulp 3.9.0
-//==================================================================
-
-// gulp.task("styles", function() {
-//     return gulp
-//     .src(["src/app/**/*.scss"])
-//     .pipe(concat("main.css"))
-//     .pipe(gulp.dest("dist/"))
-//     .pipe(notify({ message: "CSS files successfully compiled into main.css" }));
-// });
-
-// gulp.task("serve", function() {
-//     browserSync.init({
-//         server: {
-//             baseDir: "dist"
-//         }
-//     });
-
-//     gulp.watch("app/**/*.scss", gulp.series("styles"));
-//     gulp.watch("app/**/*.js", gulp.series("scripts"));
-//     gulp.watch("dist", browserSync.reload);
-// });
-
-// gulp.task("scripts", function() {
-//     return gulp
-//         .src(["src/app/**/*.js"])
-//         .pipe(concat("main.js"))
-//         .pipe(gulp.dest("dist/"))
-//         .pipe(notify({ message: "JS files successfully concated and reduced to main.js" }));
-// });

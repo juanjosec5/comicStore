@@ -1,10 +1,16 @@
 <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+    <h3 class="modal-title" id="modal-title">{{baseModalVm.modalData.title}}</h3>
+    <div class="closeIconWrapper" ng-if="baseModalVm.modalData.closeIcon">
+        <button class="closeIcon" ng-click="baseModalVm.actions.dismiss()">X</button>
+    </div>
 </div>
 <div class="modal-body" id="modal-body">
-    <p>This is my modal body</p>
+    {{baseModalVm.modalData.body}}
 </div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="baseModalVm.actions.close()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="baseModalVm.actions.dismiss()">Cancel</button>
+<div class="modal-footer" ng-if="baseModalVm.modalData.buttons">
+    <button ng-repeat="button in baseModalVm.modalData.buttons" 
+        class="btn btn-{{button.type}}" 
+        ng-click="button.action()">
+        {{button.text}}
+    </button>
 </div>

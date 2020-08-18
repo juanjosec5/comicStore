@@ -11,6 +11,7 @@
         var vm = this;
 
         vm.actions = modalFactory;
+        vm.modalData = modalData;
 
         console.log(modalData);
     }

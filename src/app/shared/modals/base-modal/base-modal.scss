@@ -1,0 +1,16 @@
+.closeIconWrapper{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+
+    button{
+        border: none;
+        background: none;
+        font-weight: 600;
+        font-size: 1.3em;
+        color: #424242;
+    }
+    button:hover{
+        color: #ffc107;
+    }
+}

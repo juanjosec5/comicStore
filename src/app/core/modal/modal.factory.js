@@ -17,27 +17,24 @@
             size: 'lg',
             resolve: {
                 modalData: {
-                    buttons: [{
-                        text: 'login',
-                        action: function () {
-                            console.log('alskfn')
-                        },
-                        type: 'primary'
-                    }],
-                    random: 2
+                    title:'override me',
+                    body: 'override me',
+                    buttons: false,
+                    closeIcon: true
                 }
             }
         }
 
-        return {         
+        return {
             openModal: openModal,
             close: close,
             dismiss: dismiss
         }
 
         function openModal(options){
-            options = angular.merge({}, defaultOptions, options || {});
+            options = _.mergeWith({}, defaultOptions, options || {}, mergeCustomizer);
             modalInstance = $uibModal.open(options);
+            return modalInstance;
         }
 
         function close() {
@@ -46,6 +43,12 @@
 
         function dismiss() {
             modalInstance.dismiss('cancel');
+        }
+
+        function mergeCustomizer(objValue, srcValue) {
+            if (_.isArray(objValue) ||  _.isArray(srcValue)) {
+                return srcValue;
+            }
         }
     }
 }());

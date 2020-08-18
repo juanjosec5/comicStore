@@ -15,6 +15,14 @@
                 templateUrl: '/features/home/home.template.html',
                 controller: 'homeController',
                 controllerAs: 'homeVm'
+                // resolve: {
+                //     homeData: homeData
+                // }
             });
+
+            // homeData.$inject = [];
+            // function homeData(){
+
+            // }
         }
 })();
