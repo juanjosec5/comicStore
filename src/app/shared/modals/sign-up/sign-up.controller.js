@@ -5,11 +5,12 @@
         .module('sharedModule')
         .controller('signUpController', signUpController)
 
-        signUpController.inject = ['modalFactory'];
+        signUpController.inject = ['modalFactory', 'modalData'];
 
-    function signUpController(modalFactory){
+    function signUpController(modalFactory,  modalData){
         var vm = this;
         vm.actions = modalFactory;
+        vm.modalData = modalData;
         vm.signUp = signUp;
 
         function signUp() {

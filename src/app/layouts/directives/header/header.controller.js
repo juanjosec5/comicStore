@@ -17,7 +17,24 @@
             var loginModalOption = {
                 templateUrl: '/shared/modals/login/login.html',
                 controller: 'loginModalController',
-                controllerAs: 'loginModalVm'
+                controllerAs: 'loginModalVm',
+                resolve: {
+                    modalData: {
+                        title:'Login Modal Title',
+                        buttons: [
+                                {
+                                text: 'Log in',
+                                action: modalFactory.close,
+                                type: 'primary'
+                            },
+                            {
+                                text: 'Cancel',
+                                action: modalFactory.dismiss,
+                                type: 'secondary'
+                            }
+                        ]
+                    }
+                }
             }
             modalFactory.openModal(loginModalOption);
         }
@@ -31,36 +48,41 @@
                     modalData: {
                         title:'Sign up Modal Title',
                         body: 'Sign up Modal Body',
-                        buttons: [{
-                            text: 'Ok',
-                            action: function () {
-                                console.log('alskfn');
+                        buttons: [
+                                {
+                                text: 'Sign Up',
+                                action: modalFactory.close,
+                                type: 'primary'
                             },
-                            type: 'primary'
-                        }
-                    ]}
+                            {
+                                text: 'Cancel',
+                                action: modalFactory.dismiss,
+                                type: 'secondary'
+                            }
+                        ]
+                    }
                 }
             }
             modalFactory.openModal(signUpModalOptions);
         }
 
         function openBaseModal() {
-            // var baseModalOptions = {
-            //     resolve: {
-            //         modalData: {
-            //             title:'replaced title',
-            //             body: 'modal body',
-            //             buttons: [
-            //                 {
-            //                     text: 'BLA',
-            //                     action: modalFactory.close,
-            //                     type: 'primary'
-            //                 },
-            //             ]
-            //         }
-            //     }
-            // }
-            modalFactory.openModal();
+            var baseModalOptions = {
+                resolve: {
+                    modalData: {
+                        title:'replaced title',
+                        body: 'replaced body',
+                        buttons: [
+                            {
+                                text: 'BLA',
+                                action: modalFactory.close,
+                                type: 'primary'
+                            },
+                        ]
+                    }
+                }
+            }
+            modalFactory.openModal(baseModalOptions);
         }
     }
 })();

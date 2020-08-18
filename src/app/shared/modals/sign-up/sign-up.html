@@ -1,10 +1,33 @@
 <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">SIGN UP MODAL</h3>
+    <h3 class="modal-title" id="modal-title">{{signUpModalVm.modalData.title}}</h3>
+    <div class="closeIconWrapper" ng-if="signUpModalVm.modalData.closeIcon">
+        <button class="closeIcon" ng-click="signUpModalVm.actions.dismiss()">X</button>
+    </div>
 </div>
 <div class="modal-body" id="modal-body">
-    <p>This is my modal body</p>
+    <ng-form name="login">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" required/>
+            </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" required/>
+            </div>
+            <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" required/>
+            </div>
+        </ng-form>
 </div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="signUpModalVm.signUp()">SIGN UP</button>
-    <button class="btn btn-warning" type="button" ng-click="signUpModalVm.actions.dismiss()">CANCEL</button>
+<div class="modal-footer" ng-if="signUpModalVm.modalData.buttons">
+    <button ng-repeat="button in signUpModalVm.modalData.buttons" 
+        class="btn btn-{{button.type}}" 
+        ng-click="button.action()">
+        {{button.text}}
+    </button>
 </div>

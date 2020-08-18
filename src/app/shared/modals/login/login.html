@@ -1,10 +1,22 @@
 <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">LOGIN MODAL</h3>
+    <h3 class="modal-title" id="modal-title">{{loginModalVm.modalData.title}}</h3>
+    <div class="closeIconWrapper" ng-if="loginModalVm.modalData.closeIcon">
+        <button class="closeIcon" ng-click="loginModalVm.actions.dismiss()">X</button>
+    </div>
 </div>
 <div class="modal-body" id="modal-body">
-    <p>This is my modal body</p>
+    <ng-form name="login">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" required/>
+          </div>
+      </ng-form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="loginModalVm.login()">LOGIN</button>
+    <button class="btn btn-primary" type="abutton" ng-click="loginModalVm.login()">LOGIN</button>
     <button class="btn btn-warning" type="button" ng-click="loginModalVm.actions.dismiss()">CANCEL</button>
 </div>
