@@ -4,19 +4,37 @@
         <button class="closeIcon" ng-click="loginModalVm.actions.dismiss()">X</button>
     </div>
 </div>
-<div class="modal-body" id="modal-body">
-    <ng-form name="login">
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" class="form-control" required/>
+<form name="loginForm" ng-model-options="{ updateOn: 'blur'}" novalidate>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group" 
+            ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty}">
+            <label for="email">Email</label>
+            <input id="email" 
+                name="email"
+                type="email"     
+                class="form-control"
+                ng-model="loginModalVm.credentials.email" 
+                required />
+            <span ng-if="loginForm.email.$invalid && loginForm.email.$dirty"><small>invalid email</small></span>
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" required/>
-          </div>
-      </ng-form>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="abutton" ng-click="loginModalVm.login()">LOGIN</button>
-    <button class="btn btn-warning" type="button" ng-click="loginModalVm.actions.dismiss()">CANCEL</button>
-</div>
+        <div class="form-group"
+            ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty}">
+            <label for="password">Password</label>
+            <input id="password"
+                name="password"
+                type="password"
+                class="form-control"
+                ng-model="loginModalVm.credentials.password"
+                required />
+            <span ng-if="loginForm.password.$invalid && loginForm.password.$dirty">invalid password</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" 
+            type="submit" 
+            ng-click="loginModalVm.login(loginForm)">
+            LOGIN
+        </button>
+        <button class="btn btn-warning" type="button" ng-click="loginModalVm.actions.dismiss()">CANCEL</button>
+    </div>
+</form>

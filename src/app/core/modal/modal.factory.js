@@ -14,7 +14,8 @@
             keyboard: true,
             controller: 'baseModalController',
             controllerAs: 'baseModalVm',
-            size: 'lg',
+            size: 'md',
+            backdrop: 'static',
             resolve: {
                 modalData: {
                     title:'override me',

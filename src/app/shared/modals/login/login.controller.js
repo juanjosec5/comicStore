@@ -9,13 +9,28 @@
 
     function loginModalController(modalFactory, modalData){
         var vm = this;
-        vm.actions = modalFactory;
-        vm.modalData = modalData;
-        vm.login = login;
+        
+        activate();
+        
+        function activate() {
+            vm.actions = modalFactory;
+            vm.modalData = modalData;
+            vm.login = login;
+            vm.credentials = {
+                email: '',
+                password: ''
+            }
+        }
 
-        function login() {
-            console.log('logging in');
-            modalFactory.close();
+        function login(form) {
+            console.log('logging in', vm.credentials, form);
+
+            if (form.$invalid) {
+                form.email.$setDirty();
+                form.password.$setDirty();
+            } else {
+                modalFactory.close(); 
+            }
         }
     }
 }());
