@@ -14,8 +14,9 @@
                 type="email"     
                 class="form-control"
                 ng-model="loginModalVm.credentials.email" 
+                ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/"
                 required />
-            <span ng-if="loginForm.email.$invalid && loginForm.email.$dirty"><small>invalid email</small></span>
+            <span ng-if="loginForm.email.$invalid && loginForm.email.$dirty"><small>invalid input</small></span>
         </div>
         <div class="form-group"
             ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty}">
@@ -26,7 +27,9 @@
                 class="form-control"
                 ng-model="loginModalVm.credentials.password"
                 required />
-            <span ng-if="loginForm.password.$invalid && loginForm.password.$dirty">invalid password</span>
+            <span ng-if="loginForm.password.$invalid && loginForm.password.$dirty">
+                <small>invalid input</small>
+            </span>
         </div>
     </div>
     <div class="modal-footer">
@@ -35,6 +38,10 @@
             ng-click="loginModalVm.login(loginForm)">
             LOGIN
         </button>
-        <button class="btn btn-warning" type="button" ng-click="loginModalVm.actions.dismiss()">CANCEL</button>
+        <button 
+            class="btn btn-warning" 
+            type="button" 
+            ng-click="loginModalVm.actions.dismiss()">CANCEL
+        </button>
     </div>
 </form>

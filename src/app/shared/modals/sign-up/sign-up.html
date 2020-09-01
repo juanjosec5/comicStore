@@ -4,30 +4,81 @@
         <button class="closeIcon" ng-click="signUpModalVm.actions.dismiss()">X</button>
     </div>
 </div>
-<div class="modal-body" id="modal-body">
-    <ng-form name="login">
-        <div class="form-group">
+<form name="signUpForm" ng-model-options="{updateOn: 'blur'}" novalidate>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group" 
+            ng-class="{'has-error': signUpForm.name.$invalid && signUpForm.name.$dirty}">
             <label>Name</label>
-            <input type="text" class="form-control" required/>
+            <input id="name"
+                name="name"
+                type="text" 
+                class="form-control" 
+                ng-model="signUpModalVm.userData.name"
+                ng-pattern="/^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/"
+                required/>
+            <span ng-if="signUpForm.name.$invalid && signUpForm.name.$dirty">
+                <small>invalid input</small>
+            </span>
         </div>
-        <div class="form-group">
+        <div class="form-group"
+            ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$dirty}">
             <label>Email</label>
-            <input type="text" class="form-control" required/>
+            <input id="email" 
+                name="email"  
+                type="email" 
+                class="form-control" 
+                ng-model="signUpModalVm.userData.email"
+                ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/"
+                required/>
+            <span ng-if="signUpForm.email.$invalid && signUpForm.email.$dirty">
+                <small>invalid input</small>
+            </span>
             </div>
-        <div class="form-group">
+        <div class="form-group"
+            ng-class="{'has-error': signUpForm.newPassword.$invalid && signUpForm.newPassword.$dirty}">
             <label>Password</label>
-            <input type="password" class="form-control" required/>
-            </div>
-            <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" class="form-control" required/>
-            </div>
-        </ng-form>
-</div>
-<div class="modal-footer" ng-if="signUpModalVm.modalData.buttons">
-    <button ng-repeat="button in signUpModalVm.modalData.buttons" 
-        class="btn btn-{{button.type}}" 
-        ng-click="button.action()">
-        {{button.text}}
-    </button>
-</div>
+            <input id="newPassword" 
+                name="newPassword" 
+                type="password"
+                class="form-control"
+                ng-model="signUpModalVm.userData.newPassword"
+                required/>
+                <!-- ng-pattern="/^(?=.*[a-z].*[a-z])(?=.*[A-Z].*[A-Z])     (?=.*\d.*\d)(?=.*\W.*\W)[a-zA-Z0-9\S]{9,}$/" -->
+            <span ng-if="signUpForm.newPassword.$invalid && signUpForm.newPassword.$dirty">
+                <small>invalid input</small>
+            </span>
+        </div>
+        <div class="form-group"
+            ng-class="{'has-error': signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty}">
+                <label>Confirm Password</label>
+                <input id="confirmPassword"
+                    name="confirmPassword"
+                    type="password" 
+                    class="form-control" 
+                    ng-model="signUpModalVm.userData.confirmPassword"
+                    validate-password
+                    new-password="signUpModalVm.userData.newPassword"
+                    required/>
+                <span ng-if="signUpForm.confirmPassword.$invalid && signUpForm.confirmPassword.$dirty">
+                    <small 
+                        ng-if="signUpForm.confirmPassword.$error.required">invalid input
+                    </small>
+                    <small 
+                    ng-if="signUpForm.confirmPassword.$error['pass-validator']">passwords don't match
+                    </small>
+                </span>
+        </div>
+    </div>
+    <div class="modal-footer" ng-if="signUpModalVm.modalData.buttons">
+        <button class="btn btn-primary" 
+            type="submit" 
+            ng-click="signUpModalVm.signUp(signUpForm)">
+            SIGN UP
+        </button>
+        <button 
+            class="btn btn-warning" 
+            type="button" 
+            ng-click="signUpModalVm.actions.dismiss()">CANCEL
+        </button>
+    </div>
+</form>
