@@ -5,9 +5,9 @@
         .module('sharedModule')
         .controller('signUpController', signUpController)
 
-        signUpController.inject = ['modalFactory', 'modalData'];
+        signUpController.inject = ['modalFactory', 'modalData', 'usersService'];
 
-    function signUpController(modalFactory,  modalData){
+    function signUpController(modalFactory,  modalData, usersService){
         var vm = this;
         vm.actions = modalFactory;
         vm.modalData = modalData;
@@ -28,6 +28,7 @@
                 form.newPassword.$setDirty();
                 form.confirmPassword.$setDirty();
             } else {
+                usersService.registerUser(vm.userData);
                 modalFactory.close();
             }
         }

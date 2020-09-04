@@ -2,5 +2,7 @@
     'use strict';
 
     angular
-        .module('coreModule', []);
+        .module('coreModule', [
+            'restangular'
+        ]);
 }());

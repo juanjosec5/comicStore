@@ -30,7 +30,8 @@ function dependencies() {
         'node_modules/angular-animate/angular-animate.js', 
         'node_modules/angular-touch/angular-touch.js',
         'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
-        'node_modules/lodash/lodash.js'
+        'node_modules/lodash/lodash.js',
+        'node_modules/restangular/dist/restangular.js'
 
     ];
 
