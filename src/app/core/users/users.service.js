@@ -6,27 +6,43 @@
         .service('usersService', UsersService)
 
         UsersService.$inject = [
-            'Restangular'
+            'Restangular', 
+            '$window'
         ]
 
-    function UsersService(Restangular) {
+    function UsersService(Restangular, $window) {
 
         return {
-            registerUser: registerUser
+            registerUser: registerUser,
+            loginUser: loginUser
         }
-        
 
         function registerUser(userData) {
-            // _test().post({name: 'TEST', email: 'TEST@email.com', password: 'TEST'});
+            userData.password = userData.confirmPassword;
+            delete userData.confirmPassword;
+            delete userData.newPassword;
             _getUsersConfig().post(userData);
+        }
+
+        function loginUser(userData) {
+            var userResponse;
+            return _loginUserData().customGET('', userData).then(function (users) {
+                userResponse = users.plain()[0];
+
+                if (userResponse) {
+                    $window.sessionStorage.setItem('userLogged', JSON.stringify(userResponse));
+                    console.log('successful login')
+                    return true;
+                } else {
+                    console.log('unsuccessful login')
+                    return false;
+                }
+            });
         }
 
         function _getUsersConfig(){
             var userInstance = Restangular.withConfig(function (RestangularConfigurer) {
                 RestangularConfigurer.addFullRequestInterceptor(function (elem, operation, what, url, headers) {
-                    console.log(elem, operation, what, url, headers);
-
-                    delete elem.name;
 
                     return {
                         element: elem,
@@ -40,21 +56,22 @@
             return userInstance.service('users');
         }
 
+        function _loginUserData(){
+            var userInstance = Restangular.one('users');
+
+            return userInstance;
+        }
+
         // function _test() {
         //     var userInstance = Restangular.service('users');
-        
         //     return userInstance;
         // }
-
         // function _testTwo() {
         //     var userInstance = Restangular.withConfig(function (myConfig) {
         //         myConfig.setBaseUrl('https://google.com/');
         //     })
-        
-        //     return userInstance.service('users');;
+        //     return userInstance.service('users');
         // }
     }
 
 }());
-
-

@@ -4,6 +4,7 @@
     angular
         .module('comicStore', [
             'ui.router',
+            'comicsModule',
             'homeModule',
             'templates',
             'ngAnimate',

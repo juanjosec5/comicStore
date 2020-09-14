@@ -7,40 +7,10 @@
       "id": 1
     },
     {
-      "name": "Juan",
-      "email": "juan@cuadros.com",
+      "name": "test test",
+      "email": "test@test.com",
       "password": "test123",
       "id": 2
-    },
-    {
-      "email": "juan@cuadros.com",
-      "password": "test123",
-      "id": 3
-    },
-    {
-      "email": "juan@cuadros.com",
-      "password": "test123",
-      "id": 4
-    },
-    {
-      "email": "juan@cuadros.com",
-      "password": "test123",
-      "id": 5
-    },
-    {
-      "email": "juan@cuadros.com",
-      "password": "test123",
-      "id": 6
-    },
-    {
-      "email": "juan@cuadros.com",
-      "password": "test123",
-      "id": 7
-    },
-    {
-      "email": "juan@cuadros.com",
-      "password": "test123",
-      "id": 8
     }
   ]
 }

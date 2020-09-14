@@ -5,6 +5,9 @@
     </div>
 </div>
 <form name="loginForm" ng-model-options="{ updateOn: 'blur'}" novalidate>
+    <div ng-if="loginModalVm.loginError">
+        <p>Error Logging in, please try again</p>
+    </div>
     <div class="modal-body" id="modal-body">
         <div class="form-group" 
             ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty}">

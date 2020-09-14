@@ -20,7 +20,6 @@
         }
 
         function signUp(form) {
-            console.log(form.$getControls());
 
             if (form.$invalid) {
                 form.name.$setDirty();
