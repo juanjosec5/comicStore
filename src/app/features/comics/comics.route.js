@@ -14,7 +14,16 @@
                 url: '/comics',
                 templateUrl: '/features/comics/comics.html',
                 controller: 'comicsController',
-                controllerAs: 'comicsVm'
+                controllerAs: 'comicsVm',
+                resolve: {
+                    comicsData: comicsData
+                }
             });
+
+            comicsData.$inject = ['comicsService'];
+
+            function comicsData(comicsService) {
+                return comicsService.getComics();
+            }
         }
 })();

@@ -5,10 +5,16 @@
         .module('comicsModule')
         .controller('comicsController', comicsController);
 
-        comicsController.$inject = [];
+        comicsController.$inject = [
+            'comicsData'
+        ];
 
-        function comicsController() {
+        function comicsController( comicsData) {
             var vm = this;
             vm.title = 'comics test title'
+            vm.comicsData = comicsData;
+
+
+            console.log('+++++++', comicsData);
         }
 })();

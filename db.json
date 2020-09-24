@@ -12,5 +12,19 @@
       "password": "test123",
       "id": 2
     }
+  ],
+  "comics": [
+    {
+      "name": "Juan",
+      "genre": "generoX",
+      "password": "test123",
+      "id": 1
+    },
+    {
+      "name": "test test",
+      "email": "test@test.com",
+      "password": "test123",
+      "id": 2
+    }
   ]
 }

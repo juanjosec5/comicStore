@@ -34,6 +34,7 @@
                         $state.go('comics');
                         modalFactory.close();
                         
+                        
                     } else {
                         vm.loginError = true;
                     }
