@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h3 class="modal-title" id="modal-title">{{loginModalVm.modalData.title}}</h3>
     <div class="closeIconWrapper" ng-if="loginModalVm.modalData.closeIcon">
-        <button class="closeIcon" ng-click="loginModalVm.actions.dismiss()">X</button>
+        <button class="closeIcon" ng-click="loginModalVm.modalData.actions.fail()">X</button>
     </div>
 </div>
 <form name="loginForm" ng-model-options="{ updateOn: 'blur'}" novalidate>
@@ -44,7 +44,7 @@
         <button 
             class="btn btn-warning" 
             type="button" 
-            ng-click="loginModalVm.actions.dismiss()">CANCEL
+            ng-click="loginModalVm.modalData.actions.fail()">CANCEL
         </button>
     </div>
 </form>

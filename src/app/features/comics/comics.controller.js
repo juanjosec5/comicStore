@@ -13,8 +13,5 @@
             var vm = this;
             vm.title = 'comics test title'
             vm.comicsData = comicsData;
-
-
-            console.log('+++++++', comicsData);
         }
 })();

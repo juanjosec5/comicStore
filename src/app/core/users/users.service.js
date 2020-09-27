@@ -7,14 +7,18 @@
 
         UsersService.$inject = [
             'Restangular', 
-            '$window'
+            '$window',
+            'modalFactory',
+            '$q'
         ]
 
-    function UsersService(Restangular, $window) {
+    function UsersService(Restangular, $window, modalFactory, $q) {
 
         return {
             registerUser: registerUser,
-            loginUser: loginUser
+            loginUser: loginUser,
+            isLoggedIn: isLoggedIn,
+            openLoginModal: openLoginModal
         }
 
         function registerUser(userData) {
@@ -31,13 +35,17 @@
 
                 if (userResponse) {
                     $window.sessionStorage.setItem('userLogged', JSON.stringify(userResponse));
-                    console.log('successful login')
                     return true;
                 } else {
-                    console.log('unsuccessful login')
                     return false;
                 }
             });
+        }
+
+        function isLoggedIn() {
+            var userData = $window.sessionStorage.getItem('userLogged');
+
+            return !!userData
         }
 
         function _getUsersConfig(){
@@ -62,16 +70,31 @@
             return userInstance;
         }
 
-        // function _test() {
-        //     var userInstance = Restangular.service('users');
-        //     return userInstance;
-        // }
-        // function _testTwo() {
-        //     var userInstance = Restangular.withConfig(function (myConfig) {
-        //         myConfig.setBaseUrl('https://google.com/');
-        //     })
-        //     return userInstance.service('users');
-        // }
-    }
+        function openLoginModal() {
+            var deferred = $q.defer(),
+                loginModalOption = {
+                    templateUrl: '/shared/modals/login/login.html',
+                    controller: 'loginModalController',
+                    controllerAs: 'loginModalVm',
+                    resolve: {
+                        modalData: {
+                            title:'Login Modal Title',
+                            actions: {
+                                success: function (isLoggedIn) {
+                                    console.log('success');
+                                    deferred.resolve(isLoggedIn);
+                                },
+                                fail: function () {
+                                    deferred.resolve(false);
+                                    modalFactory.dismiss();
+                                }
+                            }
+                        }
+                    }
+                };
 
+            modalFactory.openModal(loginModalOption);
+            return deferred.promise;
+        }
+    }
 }());

@@ -5,38 +5,24 @@
         .module('homeModule')
         .controller('headerController', headerController);
 
-    headerController.$inject = ['modalFactory'];
+    headerController.$inject = [
+        'modalFactory', 
+        'usersService',
+        '$state'
+    ];
 
-    function headerController(modalFactory) {
+    function headerController(modalFactory, usersService, $state) {
         var vm = this;
         vm.openLoginModal = openLoginModal;
         vm.openSignUpModal = openSignUpModal;
         vm.openBaseModal = openBaseModal;
 
         function openLoginModal() {
-            var loginModalOption = {
-                templateUrl: '/shared/modals/login/login.html',
-                controller: 'loginModalController',
-                controllerAs: 'loginModalVm',
-                resolve: {
-                    modalData: {
-                        title:'Login Modal Title',
-                        buttons: [
-                                {
-                                text: 'Log in',
-                                action: modalFactory.close,
-                                type: 'primary'
-                            },
-                            {
-                                text: 'Cancel',
-                                action: modalFactory.dismiss,
-                                type: 'secondary'
-                            }
-                        ]
-                    }
+            usersService.openLoginModal().then(function (isLoggedIn) {
+                if (isLoggedIn) {
+                    $state.go('comics');
                 }
-            }
-            modalFactory.openModal(loginModalOption);
+            });
         }
 
         function openSignUpModal() {

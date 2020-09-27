@@ -5,9 +5,17 @@
         .module('sharedModule')
         .controller('loginModalController', loginModalController)
 
-        loginModalController.inject = ['modalFactory', 'modalData', 'usersService', '$state'];
+        loginModalController.inject = [
+            'modalFactory', 
+            'modalData', 
+            'usersService'
+        ];
 
-    function loginModalController(modalFactory, modalData, usersService, $state){
+    function loginModalController(
+        modalFactory, 
+        modalData, 
+        usersService
+    ) {
         var vm = this;
 
         activate();
@@ -31,10 +39,8 @@
                 usersService.loginUser(vm.credentials).then(function (isLoggedIn) {
                     if (isLoggedIn) {
                         //redirect to new page
-                        $state.go('comics');
+                        vm.modalData.actions.success(isLoggedIn);
                         modalFactory.close();
-                        
-                        
                     } else {
                         vm.loginError = true;
                     }
