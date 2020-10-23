@@ -4,7 +4,7 @@
   "description": "tienda",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "author": "",
   "license": "ISC",
@@ -21,12 +21,17 @@
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
+    "jasmine": "^3.6.2",
+    "karma": "^5.2.3",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
     "sass": "^1.26.10"
   },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.27",
     "angular": "^1.8.0",
     "angular-animate": "^1.8.0",
+    "angular-mocks": "^1.8.2",
     "angular-touch": "^1.8.0",
     "angular-ui-bootstrap": "^2.5.6",
     "bootstrap": "3.3.7",
